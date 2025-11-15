@@ -150,12 +150,13 @@ public class MarketingManagerWorkAreaJPanel1 extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
-
-        ManageTheBusinessJPanel aos = new ManageTheBusinessJPanel(business, CardSequencePanel);
-
-        CardSequencePanel.add("ManageVulns", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+         CardSequencePanel.removeAll();
+    
+    UserInterface.ProductManagement.MarketingWorkspaceJPanel marketingPanel = 
+        new UserInterface.ProductManagement.MarketingWorkspaceJPanel(business, CardSequencePanel);
+    
+    CardSequencePanel.add("MarketingWorkspace", marketingPanel);
+    ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton4IdentifyResourceAssetsActionPerformed
 
