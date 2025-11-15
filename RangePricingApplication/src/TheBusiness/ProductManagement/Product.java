@@ -78,30 +78,6 @@ public class Product {
         }
         return sum;
     }
-
-    private int originalTargetPrice; // Add this field
-
-    // In constructors, add:
-    originalTargetPrice = tp; // Store original
-
-    // Add these new methods:
-    public void updateTargetPrice(int newTargetPrice) {
-        if (newTargetPrice < floorPrice) {
-            targetPrice = floorPrice;
-        } else if (newTargetPrice > ceilingPrice) {
-            targetPrice = ceilingPrice;
-        } else {
-            targetPrice = newTargetPrice;
-        }
-    }
-
-    public void resetTargetPrice() {
-        targetPrice = originalTargetPrice;
-    }
-
-    public int getOriginalTargetPrice() {
-        return originalTargetPrice;
-    }
         public int getSalesVolume() {
         int sum = 0;
         for (OrderItem oi : orderitems) {
