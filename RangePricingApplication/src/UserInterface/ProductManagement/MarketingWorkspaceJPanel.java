@@ -284,4 +284,9 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                 btnRunSimulationActionPerformed(evt);
             }
         });
+
+        txtSimulationResults.setEditable(false);
+        txtSimulationResults.setColumns(20);
+        txtSimulationResults.setRows(20);
+        jScrollPane2.setViewportView(txtSimulationResults);
 }
