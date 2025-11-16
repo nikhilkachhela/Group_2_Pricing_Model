@@ -525,84 +525,84 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         int newPrice = (int)(currentPrice * 0.90); // Decrease by 10%
         txtNewTarget.setText(String.valueOf(newPrice));
         System.out.println("💰 Decreased price from " + currentPrice + " to " + newPrice);
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
-    }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
+        }
     }//GEN-LAST:event_btnDecrease10ActionPerformed
 
     private void btnRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunSimulationActionPerformed
         // TODO add your handling code here:
         System.out.println("🎮 Running simulation...");
     
-    txtSimulationResults.setText("RUNNING SIMULATION...\n\n");
-    
-    // Calculate current total revenue
-    int totalRevenue = business.getMasterOrderList().getSalesVolume();
-    
-    // Calculate total target revenue (what we SHOULD make with current targets)
-    int totalTargetRevenue = calculateTotalTargetRevenue();
-    
-    // Calculate performance
-    int revenuePerformance = totalRevenue - totalTargetRevenue;
-    double performancePercentage = ((double)revenuePerformance / totalTargetRevenue) * 100;
-    
-    // Count products above/below target
-    int productsAboveTarget = 0;
-    int productsBelowTarget = 0;
-    
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            int above = product.getNumberOfProductSalesAboveTarget();
-            int below = product.getNumberOfProductSalesBelowTarget();
-            
-            if (above > below) productsAboveTarget++;
-            else if (below > above) productsBelowTarget++;
+        txtSimulationResults.setText("RUNNING SIMULATION...\n\n");
+
+        // Calculate current total revenue
+        int totalRevenue = business.getMasterOrderList().getSalesVolume();
+
+        // Calculate total target revenue (what we SHOULD make with current targets)
+        int totalTargetRevenue = calculateTotalTargetRevenue();
+
+        // Calculate performance
+        int revenuePerformance = totalRevenue - totalTargetRevenue;
+        double performancePercentage = ((double)revenuePerformance / totalTargetRevenue) * 100;
+
+        // Count products above/below target
+        int productsAboveTarget = 0;
+        int productsBelowTarget = 0;
+
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+
+                if (above > below) productsAboveTarget++;
+                else if (below > above) productsBelowTarget++;
+            }
         }
-    }
-    
-    // Display results
-    StringBuilder result = new StringBuilder();
-    result.append("═══════════════════════════════════════════════\n");
-    result.append("           SIMULATION RESULTS\n");
-    result.append("═══════════════════════════════════════════════\n\n");
-    
-    result.append("💰 REVENUE ANALYSIS:\n");
-    result.append("   Actual Revenue:        $").append(String.format("%,d", totalRevenue)).append("\n");
-    result.append("   Target Revenue:        $").append(String.format("%,d", totalTargetRevenue)).append("\n");
-    result.append("   Performance:           $").append(String.format("%,d", revenuePerformance));
-    
-    if (revenuePerformance > 0) {
-        result.append(" ✅ ABOVE TARGET\n");
-    } else {
-        result.append(" ❌ BELOW TARGET\n");
-    }
-    
-    result.append("   Performance %:         ").append(String.format("%.2f%%", performancePercentage)).append("\n\n");
-    
-    result.append("📊 PRODUCT PERFORMANCE:\n");
-    result.append("   Products Above Target: ").append(productsAboveTarget).append("\n");
-    result.append("   Products Below Target: ").append(productsBelowTarget).append("\n\n");
-    
-    result.append("💡 RECOMMENDATIONS:\n");
-    if (productsBelowTarget > productsAboveTarget) {
-        result.append("   ⚠️  Many products selling below target!\n");
-        result.append("   → Consider DECREASING target prices for slow products\n");
-        result.append("   → This will improve sales volume\n");
-    } else if (productsAboveTarget > productsBelowTarget * 2) {
-        result.append("   🚀 Many products selling above target!\n");
-        result.append("   → Consider INCREASING target prices for hot products\n");
-        result.append("   → This will maximize profit margins\n");
-    } else {
-        result.append("   ✅ Price targets are well balanced!\n");
-        result.append("   → Continue monitoring performance\n");
-    }
-    
-    result.append("\n═══════════════════════════════════════════════\n");
-    
-    txtSimulationResults.setText(result.toString());
-    
-    System.out.println("✅ Simulation complete!");
+
+        // Display results
+        StringBuilder result = new StringBuilder();
+        result.append("═══════════════════════════════════════════════\n");
+        result.append("           SIMULATION RESULTS\n");
+        result.append("═══════════════════════════════════════════════\n\n");
+
+        result.append("💰 REVENUE ANALYSIS:\n");
+        result.append("   Actual Revenue:        $").append(String.format("%,d", totalRevenue)).append("\n");
+        result.append("   Target Revenue:        $").append(String.format("%,d", totalTargetRevenue)).append("\n");
+        result.append("   Performance:           $").append(String.format("%,d", revenuePerformance));
+
+        if (revenuePerformance > 0) {
+            result.append(" ✅ ABOVE TARGET\n");
+        } else {
+            result.append(" ❌ BELOW TARGET\n");
+        }
+
+        result.append("   Performance %:         ").append(String.format("%.2f%%", performancePercentage)).append("\n\n");
+
+        result.append("📊 PRODUCT PERFORMANCE:\n");
+        result.append("   Products Above Target: ").append(productsAboveTarget).append("\n");
+        result.append("   Products Below Target: ").append(productsBelowTarget).append("\n\n");
+
+        result.append("💡 RECOMMENDATIONS:\n");
+        if (productsBelowTarget > productsAboveTarget) {
+            result.append("   ⚠️  Many products selling below target!\n");
+            result.append("   → Consider DECREASING target prices for slow products\n");
+            result.append("   → This will improve sales volume\n");
+        } else if (productsAboveTarget > productsBelowTarget * 2) {
+            result.append("   🚀 Many products selling above target!\n");
+            result.append("   → Consider INCREASING target prices for hot products\n");
+            result.append("   → This will maximize profit margins\n");
+        } else {
+            result.append("   ✅ Price targets are well balanced!\n");
+            result.append("   → Continue monitoring performance\n");
+        }
+
+        result.append("\n═══════════════════════════════════════════════\n");
+
+        txtSimulationResults.setText(result.toString());
+
+        System.out.println("✅ Simulation complete!");
     }//GEN-LAST:event_btnRunSimulationActionPerformed
 
     private void btnGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateReportActionPerformed
