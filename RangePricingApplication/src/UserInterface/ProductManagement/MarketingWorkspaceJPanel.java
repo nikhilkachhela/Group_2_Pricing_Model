@@ -1134,42 +1134,42 @@ private void refreshProductsTable() {
 }
 
 // NEW METHOD: Color code rows based on performance
-private void colorCodeTableRows() {
-    productsTable.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
-        @Override
-        public java.awt.Component getTableCellRendererComponent(
-                javax.swing.JTable table, Object value, boolean isSelected, 
-                boolean hasFocus, int row, int column) {
-            
-            java.awt.Component cell = super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
-            
-            if (!isSelected) {
-                
-                if (column == 0) {
-        cell.setBackground(new java.awt.Color(245, 245, 245)); // Very light gray
-        cell.setFont(cell.getFont().deriveFont(java.awt.Font.BOLD)); // Make supplier names bold
-        return cell;
-    }
-                // 🆕 UPDATED: Column indices shifted by 1 because we added Supplier column
-                int above = (Integer) table.getValueAt(row, 3); // Column 3 = Above Target (was 2)
-                int below = (Integer) table.getValueAt(row, 4); // Column 4 = Below Target (was 3)
-                
-                if (above > below && above > 0) {
-                    cell.setBackground(new java.awt.Color(200, 255, 200)); // Light green
-                } else if (below > above && below > 0) {
-                    cell.setBackground(new java.awt.Color(255, 200, 200)); // Light red
-                } else if (above == 0 && below == 0) {
-                    cell.setBackground(new java.awt.Color(240, 240, 240)); // Light gray
-                } else {
-                    cell.setBackground(java.awt.Color.WHITE);
-                }
-            }
-            
+    private void colorCodeTableRows() {
+        productsTable.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                    javax.swing.JTable table, Object value, boolean isSelected, 
+                    boolean hasFocus, int row, int column) {
+
+                java.awt.Component cell = super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+
+                    if (column == 0) {
+            cell.setBackground(new java.awt.Color(245, 245, 245)); // Very light gray
+            cell.setFont(cell.getFont().deriveFont(java.awt.Font.BOLD)); // Make supplier names bold
             return cell;
         }
-    });
-}
+                    // 🆕 UPDATED: Column indices shifted by 1 because we added Supplier column
+                    int above = (Integer) table.getValueAt(row, 3); // Column 3 = Above Target (was 2)
+                    int below = (Integer) table.getValueAt(row, 4); // Column 4 = Below Target (was 3)
+
+                    if (above > below && above > 0) {
+                        cell.setBackground(new java.awt.Color(200, 255, 200)); // Light green
+                    } else if (below > above && below > 0) {
+                        cell.setBackground(new java.awt.Color(255, 200, 200)); // Light red
+                    } else if (above == 0 && below == 0) {
+                        cell.setBackground(new java.awt.Color(240, 240, 240)); // Light gray
+                    } else {
+                        cell.setBackground(java.awt.Color.WHITE);
+                    }
+                }
+
+                return cell;
+            }
+        });
+    }
 
 private void updateDashboard() {
     System.out.println("📊 Updating dashboard...");
