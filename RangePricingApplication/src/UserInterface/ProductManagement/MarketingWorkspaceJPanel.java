@@ -525,356 +525,356 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         int newPrice = (int)(currentPrice * 0.90); // Decrease by 10%
         txtNewTarget.setText(String.valueOf(newPrice));
         System.out.println("💰 Decreased price from " + currentPrice + " to " + newPrice);
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
-    }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
+        }
     }//GEN-LAST:event_btnDecrease10ActionPerformed
 
     private void btnRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunSimulationActionPerformed
         // TODO add your handling code here:
         System.out.println("🎮 Running simulation...");
     
-    txtSimulationResults.setText("RUNNING SIMULATION...\n\n");
-    
-    // Calculate current total revenue
-    int totalRevenue = business.getMasterOrderList().getSalesVolume();
-    
-    // Calculate total target revenue (what we SHOULD make with current targets)
-    int totalTargetRevenue = calculateTotalTargetRevenue();
-    
-    // Calculate performance
-    int revenuePerformance = totalRevenue - totalTargetRevenue;
-    double performancePercentage = ((double)revenuePerformance / totalTargetRevenue) * 100;
-    
-    // Count products above/below target
-    int productsAboveTarget = 0;
-    int productsBelowTarget = 0;
-    
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            int above = product.getNumberOfProductSalesAboveTarget();
-            int below = product.getNumberOfProductSalesBelowTarget();
-            
-            if (above > below) productsAboveTarget++;
-            else if (below > above) productsBelowTarget++;
+        txtSimulationResults.setText("RUNNING SIMULATION...\n\n");
+
+        // Calculate current total revenue
+        int totalRevenue = business.getMasterOrderList().getSalesVolume();
+
+        // Calculate total target revenue (what we SHOULD make with current targets)
+        int totalTargetRevenue = calculateTotalTargetRevenue();
+
+        // Calculate performance
+        int revenuePerformance = totalRevenue - totalTargetRevenue;
+        double performancePercentage = ((double)revenuePerformance / totalTargetRevenue) * 100;
+
+        // Count products above/below target
+        int productsAboveTarget = 0;
+        int productsBelowTarget = 0;
+
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+
+                if (above > below) productsAboveTarget++;
+                else if (below > above) productsBelowTarget++;
+            }
         }
-    }
-    
-    // Display results
-    StringBuilder result = new StringBuilder();
-    result.append("═══════════════════════════════════════════════\n");
-    result.append("           SIMULATION RESULTS\n");
-    result.append("═══════════════════════════════════════════════\n\n");
-    
-    result.append("💰 REVENUE ANALYSIS:\n");
-    result.append("   Actual Revenue:        $").append(String.format("%,d", totalRevenue)).append("\n");
-    result.append("   Target Revenue:        $").append(String.format("%,d", totalTargetRevenue)).append("\n");
-    result.append("   Performance:           $").append(String.format("%,d", revenuePerformance));
-    
-    if (revenuePerformance > 0) {
-        result.append(" ✅ ABOVE TARGET\n");
-    } else {
-        result.append(" ❌ BELOW TARGET\n");
-    }
-    
-    result.append("   Performance %:         ").append(String.format("%.2f%%", performancePercentage)).append("\n\n");
-    
-    result.append("📊 PRODUCT PERFORMANCE:\n");
-    result.append("   Products Above Target: ").append(productsAboveTarget).append("\n");
-    result.append("   Products Below Target: ").append(productsBelowTarget).append("\n\n");
-    
-    result.append("💡 RECOMMENDATIONS:\n");
-    if (productsBelowTarget > productsAboveTarget) {
-        result.append("   ⚠️  Many products selling below target!\n");
-        result.append("   → Consider DECREASING target prices for slow products\n");
-        result.append("   → This will improve sales volume\n");
-    } else if (productsAboveTarget > productsBelowTarget * 2) {
-        result.append("   🚀 Many products selling above target!\n");
-        result.append("   → Consider INCREASING target prices for hot products\n");
-        result.append("   → This will maximize profit margins\n");
-    } else {
-        result.append("   ✅ Price targets are well balanced!\n");
-        result.append("   → Continue monitoring performance\n");
-    }
-    
-    result.append("\n═══════════════════════════════════════════════\n");
-    
-    txtSimulationResults.setText(result.toString());
-    
-    System.out.println("✅ Simulation complete!");
+
+        // Display results
+        StringBuilder result = new StringBuilder();
+        result.append("═══════════════════════════════════════════════\n");
+        result.append("           SIMULATION RESULTS\n");
+        result.append("═══════════════════════════════════════════════\n\n");
+
+        result.append("💰 REVENUE ANALYSIS:\n");
+        result.append("   Actual Revenue:        $").append(String.format("%,d", totalRevenue)).append("\n");
+        result.append("   Target Revenue:        $").append(String.format("%,d", totalTargetRevenue)).append("\n");
+        result.append("   Performance:           $").append(String.format("%,d", revenuePerformance));
+
+        if (revenuePerformance > 0) {
+            result.append(" ✅ ABOVE TARGET\n");
+        } else {
+            result.append(" ❌ BELOW TARGET\n");
+        }
+
+        result.append("   Performance %:         ").append(String.format("%.2f%%", performancePercentage)).append("\n\n");
+
+        result.append("📊 PRODUCT PERFORMANCE:\n");
+        result.append("   Products Above Target: ").append(productsAboveTarget).append("\n");
+        result.append("   Products Below Target: ").append(productsBelowTarget).append("\n\n");
+
+        result.append("💡 RECOMMENDATIONS:\n");
+        if (productsBelowTarget > productsAboveTarget) {
+            result.append("   ⚠️  Many products selling below target!\n");
+            result.append("   → Consider DECREASING target prices for slow products\n");
+            result.append("   → This will improve sales volume\n");
+        } else if (productsAboveTarget > productsBelowTarget * 2) {
+            result.append("   🚀 Many products selling above target!\n");
+            result.append("   → Consider INCREASING target prices for hot products\n");
+            result.append("   → This will maximize profit margins\n");
+        } else {
+            result.append("   ✅ Price targets are well balanced!\n");
+            result.append("   → Continue monitoring performance\n");
+        }
+
+        result.append("\n═══════════════════════════════════════════════\n");
+
+        txtSimulationResults.setText(result.toString());
+
+        System.out.println("✅ Simulation complete!");
     }//GEN-LAST:event_btnRunSimulationActionPerformed
 
     private void btnGenerateReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateReportActionPerformed
         // TODO add your handling code here:
         System.out.println("📄 Generating final report...");
     
-    StringBuilder report = new StringBuilder();
-    
-    // ========================================================================
-    // HEADER
-    // ========================================================================
-    report.append("\n");
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║              FINAL PRODUCT PERFORMANCE REPORT                                 ║\n");
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
-    report.append("\n");
-    report.append("Generated: ").append(new java.util.Date()).append("\n\n");
-    
-    // ========================================================================
-    // SECTION 1: ACTUAL PRICE CHANGES APPLIED (BEFORE & AFTER)
-    // ========================================================================
-    if (!priceChangeHistory.isEmpty()) {
+        StringBuilder report = new StringBuilder();
+
+        // ========================================================================
+        // HEADER
+        // ========================================================================
+        report.append("\n");
         report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-        report.append("║ ✏️  PRICE CHANGES APPLIED (BEFORE & AFTER ADJUSTMENTS)                        ║\n");
-        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-        report.append(String.format("║ %-40s | %12s | %12s | %10s ║\n", 
-            "Product Name", "Before", "After", "Change"));
-        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-        
-        // Show up to 30 changes
-        int changeCount = 0;
-        for (PriceChangeRecord change : priceChangeHistory) {
-            String name = truncate(change.productName, 40);
-            int difference = change.afterPrice - change.beforePrice;
-            String changeStr = (difference > 0 ? "+" : "") + String.format("$%,d", difference);
-            
-            report.append(String.format("║ %-40s | $%,10d | $%,10d | %10s ║\n",
-                name,
-                change.beforePrice,
-                change.afterPrice,
-                changeStr));
-            
-            changeCount++;
-            if (changeCount >= 30) {
-                int remaining = priceChangeHistory.size() - 30;
-                if (remaining > 0) {
-                    report.append(String.format("║ ... and %d more price changes                                                 ║\n", remaining));
-                }
-                break;
-            }
-        }
-        
-        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    } else {
-        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-        report.append("║ ⚠️  NO PRICE CHANGES APPLIED YET                                              ║\n");
-        report.append("║                                                                               ║\n");
-        report.append("║ Use 'Auto-Optimize' or manually adjust prices to see before/after changes.   ║\n");
-        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    }
-    
-    // ========================================================================
-    // SECTION 2: COLLECT PRODUCT PERFORMANCE DATA
-    // ========================================================================
-    java.util.ArrayList<ProductPerformanceData> performanceList = new java.util.ArrayList<>();
-    
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            
-            int salesAbove = product.getNumberOfProductSalesAboveTarget();
-            int salesBelow = product.getNumberOfProductSalesBelowTarget();
-            int totalSales = salesAbove + salesBelow;
-            
-            if (totalSales > 0) {
-                ProductPerformanceData data = new ProductPerformanceData();
-                data.productName = product.toString();
-                data.targetPrice = product.getTargetPrice();
-                data.salesAbove = salesAbove;
-                data.salesBelow = salesBelow;
-                data.revenue = product.getSalesVolume();
-                data.pricePerformance = product.getOrderPricePerformance();
-                
-                performanceList.add(data);
-            }
-        }
-    }
-    
-    // Sort by revenue (highest first)
-    performanceList.sort((a, b) -> Integer.compare(b.revenue, a.revenue));
-    
-    // ========================================================================
-    // SECTION 3: TOP 10 PERFORMING PRODUCTS (BY REVENUE)
-    // ========================================================================
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║ 🏆 TOP 10 PERFORMING PRODUCTS (By Revenue)                                    ║\n");
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    report.append(String.format("║ %-40s | %12s | %6s | %6s | %10s ║\n", 
-        "Product Name", "Target Price", "Above", "Below", "Revenue"));
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    
-    for (int i = 0; i < Math.min(10, performanceList.size()); i++) {
-        ProductPerformanceData data = performanceList.get(i);
-        String name = truncate(data.productName, 40);
-        
-        report.append(String.format("║ %-40s | $%,10d | %6d | %6d | $%,8d ║\n", 
-            name, data.targetPrice, data.salesAbove, data.salesBelow, data.revenue));
-    }
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    
-    // ========================================================================
-    // SECTION 4: PRODUCTS NEEDING PRICE DECREASE (Selling Below Target)
-    // ========================================================================
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║ ⚠️  PRODUCTS NEEDING PRICE DECREASE (Selling Below Target)                    ║\n");
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    report.append(String.format("║ %-40s | %12s | %12s | %12s ║\n", 
-        "Product Name", "Current", "Suggested", "Status"));
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    
-    int decreaseCount = 0;
-    for (ProductPerformanceData data : performanceList) {
-        int totalSales = data.salesAbove + data.salesBelow;
-        
-        if (data.salesBelow > data.salesAbove && totalSales >= 2) {
-            String name = truncate(data.productName, 40);
-            int suggested = (int)(data.targetPrice * 0.9);
-            
-            // Check if this product was actually adjusted
-            String status = "NOT APPLIED";
+        report.append("║              FINAL PRODUCT PERFORMANCE REPORT                                 ║\n");
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+        report.append("\n");
+        report.append("Generated: ").append(new java.util.Date()).append("\n\n");
+
+        // ========================================================================
+        // SECTION 1: ACTUAL PRICE CHANGES APPLIED (BEFORE & AFTER)
+        // ========================================================================
+        if (!priceChangeHistory.isEmpty()) {
+            report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+            report.append("║ ✏️  PRICE CHANGES APPLIED (BEFORE & AFTER ADJUSTMENTS)                        ║\n");
+            report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+            report.append(String.format("║ %-40s | %12s | %12s | %10s ║\n", 
+                "Product Name", "Before", "After", "Change"));
+            report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+            // Show up to 30 changes
+            int changeCount = 0;
             for (PriceChangeRecord change : priceChangeHistory) {
-                if (change.productName.equals(data.productName) && "DECREASE".equals(change.changeType)) {
-                    status = "✅ APPLIED";
+                String name = truncate(change.productName, 40);
+                int difference = change.afterPrice - change.beforePrice;
+                String changeStr = (difference > 0 ? "+" : "") + String.format("$%,d", difference);
+
+                report.append(String.format("║ %-40s | $%,10d | $%,10d | %10s ║\n",
+                    name,
+                    change.beforePrice,
+                    change.afterPrice,
+                    changeStr));
+
+                changeCount++;
+                if (changeCount >= 30) {
+                    int remaining = priceChangeHistory.size() - 30;
+                    if (remaining > 0) {
+                        report.append(String.format("║ ... and %d more price changes                                                 ║\n", remaining));
+                    }
                     break;
                 }
             }
-            
-            report.append(String.format("║ %-40s | $%,10d | $%,10d | %12s ║\n", 
-                name, data.targetPrice, suggested, status));
-            
-            decreaseCount++;
-            if (decreaseCount >= 15) break;
-        }
-    }
-    
-    if (decreaseCount == 0) {
-        report.append("║ ✅ No products need price decrease                                            ║\n");
-    }
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    
-    // ========================================================================
-    // SECTION 5: PRODUCTS NEEDING PRICE INCREASE (Selling Above Target)
-    // ========================================================================
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║ 🚀 PRODUCTS NEEDING PRICE INCREASE (Selling Above Target)                     ║\n");
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    report.append(String.format("║ %-40s | %12s | %12s | %12s ║\n", 
-        "Product Name", "Current", "Suggested", "Status"));
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    
-    int increaseCount = 0;
-    for (ProductPerformanceData data : performanceList) {
-        int totalSales = data.salesAbove + data.salesBelow;
-        
-        if (data.salesAbove > data.salesBelow && totalSales >= 2) {
-            String name = truncate(data.productName, 40);
-            int suggested = (int)(data.targetPrice * 1.1);
-            
-            // Check if this product was actually adjusted
-            String status = "NOT APPLIED";
-            for (PriceChangeRecord change : priceChangeHistory) {
-                if (change.productName.equals(data.productName) && "INCREASE".equals(change.changeType)) {
-                    status = "✅ APPLIED";
-                    break;
-                }
-            }
-            
-            report.append(String.format("║ %-40s | $%,10d | $%,10d | %12s ║\n", 
-                name, data.targetPrice, suggested, status));
-            
-            increaseCount++;
-            if (increaseCount >= 15) break;
-        }
-    }
-    
-    if (increaseCount == 0) {
-        report.append("║ ✅ No products need price increase                                            ║\n");
-    }
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    
-    // ========================================================================
-    // SECTION 6: SUMMARY STATISTICS
-    // ========================================================================
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║ 📊 EXECUTIVE SUMMARY                                                          ║\n");
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    
-    // Calculate summary metrics
-    int totalProducts = performanceList.size();
-    int totalPriceChanges = priceChangeHistory.size();
-    int pricesIncreased = 0;
-    int pricesDecreased = 0;
-    
-    for (PriceChangeRecord change : priceChangeHistory) {
-        if ("INCREASE".equals(change.changeType)) pricesIncreased++;
-        else if ("DECREASE".equals(change.changeType)) pricesDecreased++;
-    }
-    
-    int totalRevenue = business.getMasterOrderList().getSalesVolume();
-    
-    report.append(String.format("║ Total Products Analyzed:          %,10d                                  ║\n", totalProducts));
-    report.append(String.format("║ Total Business Revenue:           $%,10d                                 ║\n", totalRevenue));
-    report.append("║                                                                               ║\n");
-    report.append(String.format("║ Price Adjustments Applied:        %,10d                                  ║\n", totalPriceChanges));
-    report.append(String.format("║   - Prices Increased (+10%%):      %,10d                                  ║\n", pricesIncreased));
-    report.append(String.format("║   - Prices Decreased (-10%%):      %,10d                                  ║\n", pricesDecreased));
-    report.append("║                                                                               ║\n");
-    report.append(String.format("║ Products Above Target:            %,10d                                  ║\n", increaseCount));
-    report.append(String.format("║ Products Below Target:            %,10d                                  ║\n", decreaseCount));
-    report.append("║                                                                               ║\n");
-    
-    // Calculate adjustment percentage
-    double adjustmentRate = totalProducts > 0 ? (totalPriceChanges * 100.0 / totalProducts) : 0;
-    report.append(String.format("║ Adjustment Rate:                  %5.1f%%                                    ║\n", adjustmentRate));
-    
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
-    
-    // ========================================================================
-    // SECTION 7: RECOMMENDATIONS
-    // ========================================================================
-    report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
-    report.append("║ 💡 RECOMMENDATIONS                                                            ║\n");
-    report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
-    
-    if (totalPriceChanges == 0) {
-        report.append("║ ⚠️  No price adjustments have been applied yet.                               ║\n");
-        report.append("║                                                                               ║\n");
-        report.append("║ NEXT STEPS:                                                                   ║\n");
-        report.append("║   1. Click 'Auto-Optimize' to automatically adjust all prices                ║\n");
-        report.append("║   2. Or manually adjust individual product prices                            ║\n");
-        report.append("║   3. Re-run this report to see before/after comparisons                      ║\n");
-    } else {
-        report.append(String.format("║ ✅ Successfully optimized %d product prices (%.1f%% of catalog)              ║\n", 
-            totalPriceChanges, adjustmentRate));
-        report.append("║                                                                               ║\n");
-        
-        if (decreaseCount > increaseCount * 2) {
-            report.append("║ ⚠️  ALERT: Many products selling below target                                 ║\n");
-            report.append("║   → Consider reviewing product positioning and market fit                    ║\n");
-        } else if (increaseCount > decreaseCount * 2) {
-            report.append("║ 🚀 OPPORTUNITY: Many products selling above target                            ║\n");
-            report.append("║   → Strong market demand - prices have been optimized                        ║\n");
+
+            report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
         } else {
-            report.append("║ ✅ BALANCED: Price targets are well-calibrated with market demand            ║\n");
-            report.append("║   → Continue monitoring and make incremental adjustments                     ║\n");
+            report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+            report.append("║ ⚠️  NO PRICE CHANGES APPLIED YET                                              ║\n");
+            report.append("║                                                                               ║\n");
+            report.append("║ Use 'Auto-Optimize' or manually adjust prices to see before/after changes.   ║\n");
+            report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
         }
+
+        // ========================================================================
+        // SECTION 2: COLLECT PRODUCT PERFORMANCE DATA
+        // ========================================================================
+        java.util.ArrayList<ProductPerformanceData> performanceList = new java.util.ArrayList<>();
+
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+
+                int salesAbove = product.getNumberOfProductSalesAboveTarget();
+                int salesBelow = product.getNumberOfProductSalesBelowTarget();
+                int totalSales = salesAbove + salesBelow;
+
+                if (totalSales > 0) {
+                    ProductPerformanceData data = new ProductPerformanceData();
+                    data.productName = product.toString();
+                    data.targetPrice = product.getTargetPrice();
+                    data.salesAbove = salesAbove;
+                    data.salesBelow = salesBelow;
+                    data.revenue = product.getSalesVolume();
+                    data.pricePerformance = product.getOrderPricePerformance();
+
+                    performanceList.add(data);
+                }
+            }
+        }
+
+        // Sort by revenue (highest first)
+        performanceList.sort((a, b) -> Integer.compare(b.revenue, a.revenue));
+
+        // ========================================================================
+        // SECTION 3: TOP 10 PERFORMING PRODUCTS (BY REVENUE)
+        // ========================================================================
+        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+        report.append("║ 🏆 TOP 10 PERFORMING PRODUCTS (By Revenue)                                    ║\n");
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+        report.append(String.format("║ %-40s | %12s | %6s | %6s | %10s ║\n", 
+            "Product Name", "Target Price", "Above", "Below", "Revenue"));
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+        for (int i = 0; i < Math.min(10, performanceList.size()); i++) {
+            ProductPerformanceData data = performanceList.get(i);
+            String name = truncate(data.productName, 40);
+
+            report.append(String.format("║ %-40s | $%,10d | %6d | %6d | $%,8d ║\n", 
+                name, data.targetPrice, data.salesAbove, data.salesBelow, data.revenue));
+        }
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+        // ========================================================================
+        // SECTION 4: PRODUCTS NEEDING PRICE DECREASE (Selling Below Target)
+        // ========================================================================
+        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+        report.append("║ ⚠️  PRODUCTS NEEDING PRICE DECREASE (Selling Below Target)                    ║\n");
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+        report.append(String.format("║ %-40s | %12s | %12s | %12s ║\n", 
+            "Product Name", "Current", "Suggested", "Status"));
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+        int decreaseCount = 0;
+        for (ProductPerformanceData data : performanceList) {
+            int totalSales = data.salesAbove + data.salesBelow;
+
+            if (data.salesBelow > data.salesAbove && totalSales >= 2) {
+                String name = truncate(data.productName, 40);
+                int suggested = (int)(data.targetPrice * 0.9);
+
+                // Check if this product was actually adjusted
+                String status = "NOT APPLIED";
+                for (PriceChangeRecord change : priceChangeHistory) {
+                    if (change.productName.equals(data.productName) && "DECREASE".equals(change.changeType)) {
+                        status = "✅ APPLIED";
+                        break;
+                    }
+                }
+
+                report.append(String.format("║ %-40s | $%,10d | $%,10d | %12s ║\n", 
+                    name, data.targetPrice, suggested, status));
+
+                decreaseCount++;
+                if (decreaseCount >= 15) break;
+            }
+        }
+
+        if (decreaseCount == 0) {
+            report.append("║ ✅ No products need price decrease                                            ║\n");
+        }
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+        // ========================================================================
+        // SECTION 5: PRODUCTS NEEDING PRICE INCREASE (Selling Above Target)
+        // ========================================================================
+        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+        report.append("║ 🚀 PRODUCTS NEEDING PRICE INCREASE (Selling Above Target)                     ║\n");
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+        report.append(String.format("║ %-40s | %12s | %12s | %12s ║\n", 
+            "Product Name", "Current", "Suggested", "Status"));
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+        int increaseCount = 0;
+        for (ProductPerformanceData data : performanceList) {
+            int totalSales = data.salesAbove + data.salesBelow;
+
+            if (data.salesAbove > data.salesBelow && totalSales >= 2) {
+                String name = truncate(data.productName, 40);
+                int suggested = (int)(data.targetPrice * 1.1);
+
+                // Check if this product was actually adjusted
+                String status = "NOT APPLIED";
+                for (PriceChangeRecord change : priceChangeHistory) {
+                    if (change.productName.equals(data.productName) && "INCREASE".equals(change.changeType)) {
+                        status = "✅ APPLIED";
+                        break;
+                    }
+                }
+
+                report.append(String.format("║ %-40s | $%,10d | $%,10d | %12s ║\n", 
+                    name, data.targetPrice, suggested, status));
+
+                increaseCount++;
+                if (increaseCount >= 15) break;
+            }
+        }
+
+        if (increaseCount == 0) {
+            report.append("║ ✅ No products need price increase                                            ║\n");
+        }
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+        // ========================================================================
+        // SECTION 6: SUMMARY STATISTICS
+        // ========================================================================
+        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+        report.append("║ 📊 EXECUTIVE SUMMARY                                                          ║\n");
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+        // Calculate summary metrics
+        int totalProducts = performanceList.size();
+        int totalPriceChanges = priceChangeHistory.size();
+        int pricesIncreased = 0;
+        int pricesDecreased = 0;
+
+        for (PriceChangeRecord change : priceChangeHistory) {
+            if ("INCREASE".equals(change.changeType)) pricesIncreased++;
+            else if ("DECREASE".equals(change.changeType)) pricesDecreased++;
+        }
+
+        int totalRevenue = business.getMasterOrderList().getSalesVolume();
+
+        report.append(String.format("║ Total Products Analyzed:          %,10d                                  ║\n", totalProducts));
+        report.append(String.format("║ Total Business Revenue:           $%,10d                                 ║\n", totalRevenue));
+        report.append("║                                                                               ║\n");
+        report.append(String.format("║ Price Adjustments Applied:        %,10d                                  ║\n", totalPriceChanges));
+        report.append(String.format("║   - Prices Increased (+10%%):      %,10d                                  ║\n", pricesIncreased));
+        report.append(String.format("║   - Prices Decreased (-10%%):      %,10d                                  ║\n", pricesDecreased));
+        report.append("║                                                                               ║\n");
+        report.append(String.format("║ Products Above Target:            %,10d                                  ║\n", increaseCount));
+        report.append(String.format("║ Products Below Target:            %,10d                                  ║\n", decreaseCount));
+        report.append("║                                                                               ║\n");
+
+        // Calculate adjustment percentage
+        double adjustmentRate = totalProducts > 0 ? (totalPriceChanges * 100.0 / totalProducts) : 0;
+        report.append(String.format("║ Adjustment Rate:                  %5.1f%%                                    ║\n", adjustmentRate));
+
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n\n");
+
+        // ========================================================================
+        // SECTION 7: RECOMMENDATIONS
+        // ========================================================================
+        report.append("╔═══════════════════════════════════════════════════════════════════════════════╗\n");
+        report.append("║ 💡 RECOMMENDATIONS                                                            ║\n");
+        report.append("╠═══════════════════════════════════════════════════════════════════════════════╣\n");
+
+        if (totalPriceChanges == 0) {
+            report.append("║ ⚠️  No price adjustments have been applied yet.                               ║\n");
+            report.append("║                                                                               ║\n");
+            report.append("║ NEXT STEPS:                                                                   ║\n");
+            report.append("║   1. Click 'Auto-Optimize' to automatically adjust all prices                ║\n");
+            report.append("║   2. Or manually adjust individual product prices                            ║\n");
+            report.append("║   3. Re-run this report to see before/after comparisons                      ║\n");
+        } else {
+            report.append(String.format("║ ✅ Successfully optimized %d product prices (%.1f%% of catalog)              ║\n", 
+                totalPriceChanges, adjustmentRate));
+            report.append("║                                                                               ║\n");
+
+            if (decreaseCount > increaseCount * 2) {
+                report.append("║ ⚠️  ALERT: Many products selling below target                                 ║\n");
+                report.append("║   → Consider reviewing product positioning and market fit                    ║\n");
+            } else if (increaseCount > decreaseCount * 2) {
+                report.append("║ 🚀 OPPORTUNITY: Many products selling above target                            ║\n");
+                report.append("║   → Strong market demand - prices have been optimized                        ║\n");
+            } else {
+                report.append("║ ✅ BALANCED: Price targets are well-calibrated with market demand            ║\n");
+                report.append("║   → Continue monitoring and make incremental adjustments                     ║\n");
+            }
+        }
+
+        report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
+
+        // ========================================================================
+        // DISPLAY THE REPORT
+        // ========================================================================
+        txtFinalReport.setFont(new java.awt.Font("Courier New", java.awt.Font.PLAIN, 11));
+        txtFinalReport.setText(report.toString());
+
+        System.out.println("✅ Final report generated successfully!");
+        System.out.println("   📊 Products analyzed: " + totalProducts);
+        System.out.println("   ✏️  Price changes applied: " + totalPriceChanges);
+        System.out.println("   📈 Prices increased: " + pricesIncreased);
+        System.out.println("   📉 Prices decreased: " + pricesDecreased);
     }
-    
-    report.append("╚═══════════════════════════════════════════════════════════════════════════════╝\n");
-    
-    // ========================================================================
-    // DISPLAY THE REPORT
-    // ========================================================================
-    txtFinalReport.setFont(new java.awt.Font("Courier New", java.awt.Font.PLAIN, 11));
-    txtFinalReport.setText(report.toString());
-    
-    System.out.println("✅ Final report generated successfully!");
-    System.out.println("   📊 Products analyzed: " + totalProducts);
-    System.out.println("   ✏️  Price changes applied: " + totalPriceChanges);
-    System.out.println("   📈 Prices increased: " + pricesIncreased);
-    System.out.println("   📉 Prices decreased: " + pricesDecreased);
-}
 
 // Helper method to truncate long names
 private String truncate(String text, int maxLength) {
