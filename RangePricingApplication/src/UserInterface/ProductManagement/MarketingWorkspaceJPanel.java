@@ -903,17 +903,17 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         // TODO add your handling code here:
         String searchText = txtSearchProduct.getText().toLowerCase();
     
-    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) productsTable.getModel();
-    javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter = 
-        new javax.swing.table.TableRowSorter<>(model);
-    
-    productsTable.setRowSorter(sorter);
-    
-    if (searchText.trim().length() == 0) {
-        sorter.setRowFilter(null);
-    } else {
-        sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchText));
-    }
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) productsTable.getModel();
+        javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter = 
+            new javax.swing.table.TableRowSorter<>(model);
+
+        productsTable.setRowSorter(sorter);
+
+        if (searchText.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchText));
+        }
     }//GEN-LAST:event_txtSearchProductActionPerformed
 
     private void btnAutoOptimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoOptimizeActionPerformed
