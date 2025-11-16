@@ -513,9 +513,9 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         int newPrice = (int)(currentPrice * 1.10); // Increase by 10%
         txtNewTarget.setText(String.valueOf(newPrice));
         System.out.println("💰 Increased price from " + currentPrice + " to " + newPrice);
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
-    }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please select a product first!");
+        }
     }//GEN-LAST:event_btnIncrease10ActionPerformed
 
     private void btnDecrease10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecrease10ActionPerformed
