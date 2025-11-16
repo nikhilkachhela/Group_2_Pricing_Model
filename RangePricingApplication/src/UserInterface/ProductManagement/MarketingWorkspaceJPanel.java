@@ -17,7 +17,7 @@ public class MarketingWorkspaceJPanel extends javax.swing.JPanel {
      * Creates new form MarketingWorkspaceJPanel
      */
     JPanel CardSequencePanel;
-Business business;
+    Business business;
 
 private java.util.ArrayList<PriceChangeRecord> priceChangeHistory = new java.util.ArrayList<>();
 
@@ -494,16 +494,16 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
     private void productComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productComboBoxActionPerformed
         // TODO add your handling code here:
         String selectedProductName = (String) productComboBox.getSelectedItem();
-    if (selectedProductName == null) return;
+        if (selectedProductName == null) return;
     
-    // Find the product
-    TheBusiness.ProductManagement.Product selectedProduct = findProductByName(selectedProductName);
-    
-    if (selectedProduct != null) {
-        // Display current target price
-        txtCurrentTarget.setText(String.valueOf(selectedProduct.getTargetPrice()));
-        txtNewTarget.setText(String.valueOf(selectedProduct.getTargetPrice()));
-    }
+        // Find the product
+        TheBusiness.ProductManagement.Product selectedProduct = findProductByName(selectedProductName);
+
+        if (selectedProduct != null) {
+            // Display current target price
+            txtCurrentTarget.setText(String.valueOf(selectedProduct.getTargetPrice()));
+            txtNewTarget.setText(String.valueOf(selectedProduct.getTargetPrice()));
+        }
     }//GEN-LAST:event_productComboBoxActionPerformed
 
     private void btnIncrease10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncrease10ActionPerformed
