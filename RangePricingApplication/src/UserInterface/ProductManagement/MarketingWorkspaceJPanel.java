@@ -207,6 +207,20 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
 
 
         btnApplyChanges.setText("Apply Changes");
+         btnApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApplyChangesActionPerformed(evt);
+            }
+        });
+         btnAutoOptimize.setBackground(new java.awt.Color(255, 102, 102));
+        btnAutoOptimize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAutoOptimize.setForeground(new java.awt.Color(255, 255, 255));
+        btnAutoOptimize.setText("⚡ Auto-Optimize ALL Prices (Smart Adjustment)");
+        btnAutoOptimize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoOptimizeActionPerformed(evt);
+            }
+        });
 
        
 }
