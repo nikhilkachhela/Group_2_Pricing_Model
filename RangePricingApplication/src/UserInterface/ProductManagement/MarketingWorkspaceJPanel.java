@@ -155,7 +155,6 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                         .addComponent(supplierFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -203,16 +202,14 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
             }
         });
 
-
-
-
         btnApplyChanges.setText("Apply Changes");
-         btnApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+        btnApplyChanges.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyChangesActionPerformed(evt);
             }
         });
-         btnAutoOptimize.setBackground(new java.awt.Color(255, 102, 102));
+
+        btnAutoOptimize.setBackground(new java.awt.Color(255, 102, 102));
         btnAutoOptimize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAutoOptimize.setForeground(new java.awt.Color(255, 255, 255));
         btnAutoOptimize.setText("⚡ Auto-Optimize ALL Prices (Smart Adjustment)");
@@ -222,7 +219,7 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
             }
         });
 
-       javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +245,6 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                                 .addComponent(txtNewTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))))
                 .addContainerGap(352, Short.MAX_VALUE))
         );
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -289,4 +285,153 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         txtSimulationResults.setColumns(20);
         txtSimulationResults.setRows(20);
         jScrollPane2.setViewportView(txtSimulationResults);
-}
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel4)
+                        .addGap(66, 66, 66)
+                        .addComponent(btnRunSimulation)))
+                .addContainerGap(135, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRunSimulation)
+                    .addComponent(jLabel4))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(184, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Run Simulation", jPanel3);
+
+        btnGenerateReport.setText("Generate Final Report");
+        btnGenerateReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateReportActionPerformed(evt);
+            }
+        });
+
+        txtFinalReport.setColumns(90);
+        txtFinalReport.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
+        txtFinalReport.setRows(25);
+        jScrollPane3.setViewportView(txtFinalReport);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnGenerateReport))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(btnGenerateReport)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Final Report", jPanel4);
+
+        dashboardPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        lblTotalRevenue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTotalRevenue.setText("Total Revenue: $0");
+
+        lblProductCount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblProductCount.setText("Products Analyzed: 0");
+
+        lblPerformanceSplit.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPerformanceSplit.setText("Above Target: 0 | Below Target: 0");
+
+        lblBestProduct.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBestProduct.setForeground(new java.awt.Color(0, 255, 51));
+        lblBestProduct.setText("Best Performer: --");
+
+        btnUpdateDashboard.setText("🔄 Update Dashboard");
+        btnUpdateDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateDashboardActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
+        dashboardPanel.setLayout(dashboardPanelLayout);
+        dashboardPanelLayout.setHorizontalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dashboardPanelLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblBestProduct)
+                            .addComponent(lblPerformanceSplit)
+                            .addComponent(lblProductCount)
+                            .addComponent(lblTotalRevenue)))
+                    .addGroup(dashboardPanelLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(btnUpdateDashboard)))
+                .addContainerGap(513, Short.MAX_VALUE))
+        );
+        dashboardPanelLayout.setVerticalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(lblTotalRevenue)
+                .addGap(18, 18, 18)
+                .addComponent(lblProductCount)
+                .addGap(18, 18, 18)
+                .addComponent(lblPerformanceSplit)
+                .addGap(27, 27, 27)
+                .addComponent(lblBestProduct)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateDashboard)
+                .addContainerGap(238, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Dashboard", dashboardPanel);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 56, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addGap(43, 43, 43)
+                .addComponent(tabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
