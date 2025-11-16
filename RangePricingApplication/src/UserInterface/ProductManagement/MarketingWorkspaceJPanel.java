@@ -928,116 +928,116 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         javax.swing.JOptionPane.YES_NO_OPTION,
         javax.swing.JOptionPane.WARNING_MESSAGE);
     
-    if (confirm != javax.swing.JOptionPane.YES_OPTION) {
-        return;
-    }
-    
-    System.out.println("⚡ AUTO-OPTIMIZATION STARTED...");
-    
-    int increased = 0;
-    int decreased = 0;
-    int unchanged = 0;
-    
-    // 🆕 Clear previous auto-optimization history
-    priceChangeHistory.clear();
-    
-    // Loop through ALL products
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            
-            int above = product.getNumberOfProductSalesAboveTarget();
-            int below = product.getNumberOfProductSalesBelowTarget();
-            int currentTarget = product.getTargetPrice();
-            int totalSales = above + below;
-            
-            // CHANGED: Only require 2 total sales and a clear winner
-            if (totalSales >= 2) {
-                
-                if (above > below) {
-                    int newTarget = (int)(currentTarget * 1.10);
-                    
-                    // 🆕 Record the change
-                    priceChangeHistory.add(new PriceChangeRecord(
-                        product.toString(),
-                        currentTarget,
-                        newTarget,
-                        "INCREASE"
-                    ));
-                    
-                    product.updateProduct(product.getFloorPrice(), product.getCeilingPrice(), newTarget);
-                    increased++;
-                    
-                } else if (below > above) {
-                    int newTarget = (int)(currentTarget * 0.90);
-                    
-                    // 🆕 Record the change
-                    priceChangeHistory.add(new PriceChangeRecord(
-                        product.toString(),
-                        currentTarget,
-                        newTarget,
-                        "DECREASE"
-                    ));
-                    
-                    product.updateProduct(product.getFloorPrice(), product.getCeilingPrice(), newTarget);
-                    decreased++;
-                    
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        System.out.println("⚡ AUTO-OPTIMIZATION STARTED...");
+
+        int increased = 0;
+        int decreased = 0;
+        int unchanged = 0;
+
+        // 🆕 Clear previous auto-optimization history
+        priceChangeHistory.clear();
+
+        // Loop through ALL products
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+                int currentTarget = product.getTargetPrice();
+                int totalSales = above + below;
+
+                // CHANGED: Only require 2 total sales and a clear winner
+                if (totalSales >= 2) {
+
+                    if (above > below) {
+                        int newTarget = (int)(currentTarget * 1.10);
+
+                        // 🆕 Record the change
+                        priceChangeHistory.add(new PriceChangeRecord(
+                            product.toString(),
+                            currentTarget,
+                            newTarget,
+                            "INCREASE"
+                        ));
+
+                        product.updateProduct(product.getFloorPrice(), product.getCeilingPrice(), newTarget);
+                        increased++;
+
+                    } else if (below > above) {
+                        int newTarget = (int)(currentTarget * 0.90);
+
+                        // 🆕 Record the change
+                        priceChangeHistory.add(new PriceChangeRecord(
+                            product.toString(),
+                            currentTarget,
+                            newTarget,
+                            "DECREASE"
+                        ));
+
+                        product.updateProduct(product.getFloorPrice(), product.getCeilingPrice(), newTarget);
+                        decreased++;
+
+                    } else {
+                        unchanged++;
+                    }
                 } else {
                     unchanged++;
                 }
-            } else {
-                unchanged++;
             }
         }
-    }
-    
-    System.out.println("✅ Recorded " + priceChangeHistory.size() + " price changes");
-    
-    
-    System.out.println("✅ AUTO-OPTIMIZATION COMPLETE!");
-    System.out.println("   📈 Increased: " + increased + " products");
-    System.out.println("   📉 Decreased: " + decreased + " products");
-    System.out.println("   ➡️  Unchanged: " + unchanged + " products");
-    
-    // Refresh everything
-    refreshProductsTable();
-    loadProductComboBox();
-    
-    // Show results
-    javax.swing.JOptionPane.showMessageDialog(this,
-        String.format("⚡ AUTO-OPTIMIZATION COMPLETE!\n\n" +
-                     "📈 Increased: %d products (+10%%)\n" +
-                     "📉 Decreased: %d products (-10%%)\n" +
-                     "➡️  Unchanged: %d products\n\n" +
-                     "All tables have been updated!",
-                     increased, decreased, unchanged),
-        "Optimization Results",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        System.out.println("✅ Recorded " + priceChangeHistory.size() + " price changes");
+
+
+        System.out.println("✅ AUTO-OPTIMIZATION COMPLETE!");
+        System.out.println("   📈 Increased: " + increased + " products");
+        System.out.println("   📉 Decreased: " + decreased + " products");
+        System.out.println("   ➡️  Unchanged: " + unchanged + " products");
+
+        // Refresh everything
+        refreshProductsTable();
+        loadProductComboBox();
+
+        // Show results
+        javax.swing.JOptionPane.showMessageDialog(this,
+            String.format("⚡ AUTO-OPTIMIZATION COMPLETE!\n\n" +
+                         "📈 Increased: %d products (+10%%)\n" +
+                         "📉 Decreased: %d products (-10%%)\n" +
+                         "➡️  Unchanged: %d products\n\n" +
+                         "All tables have been updated!",
+                         increased, decreased, unchanged),
+            "Optimization Results",
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAutoOptimizeActionPerformed
 
     private void supplierFilterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierFilterComboBoxActionPerformed
         // TODO add your handling code here:
         // Get selected supplier
-    String selectedSupplier = (String) supplierFilterComboBox.getSelectedItem();
-    
-    if (selectedSupplier == null) {
-        return; // No selection
-    }
-    
-    System.out.println("🔽 Supplier filter changed to: " + selectedSupplier);
-    
-    // Check if "All Suppliers" is selected
-    if ("All Suppliers".equals(selectedSupplier)) {
-        // Show all products
-        refreshProductsTable();
-    } else {
-        // Show only products from selected supplier
-        refreshProductsTableForSupplier(selectedSupplier);
-    }
-    
-    // Update status
-    updateFilterStatus(selectedSupplier);
+        String selectedSupplier = (String) supplierFilterComboBox.getSelectedItem();
+
+        if (selectedSupplier == null) {
+            return; // No selection
+        }
+
+        System.out.println("🔽 Supplier filter changed to: " + selectedSupplier);
+
+        // Check if "All Suppliers" is selected
+        if ("All Suppliers".equals(selectedSupplier)) {
+            // Show all products
+            refreshProductsTable();
+        } else {
+            // Show only products from selected supplier
+            refreshProductsTableForSupplier(selectedSupplier);
+        }
+
+        // Update status
+        updateFilterStatus(selectedSupplier);
     }//GEN-LAST:event_supplierFilterComboBoxActionPerformed
 
     /**
