@@ -155,6 +155,7 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                         .addComponent(supplierFilterComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,14 +203,16 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
             }
         });
 
+
+
+
         btnApplyChanges.setText("Apply Changes");
-        btnApplyChanges.addActionListener(new java.awt.event.ActionListener() {
+         btnApplyChanges.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyChangesActionPerformed(evt);
             }
         });
-
-        btnAutoOptimize.setBackground(new java.awt.Color(255, 102, 102));
+         btnAutoOptimize.setBackground(new java.awt.Color(255, 102, 102));
         btnAutoOptimize.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAutoOptimize.setForeground(new java.awt.Color(255, 255, 255));
         btnAutoOptimize.setText("⚡ Auto-Optimize ALL Prices (Smart Adjustment)");
@@ -219,7 +222,7 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+       javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,6 +248,7 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                                 .addComponent(txtNewTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))))
                 .addContainerGap(352, Short.MAX_VALUE))
         );
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -269,6 +273,7 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                 .addComponent(btnAutoOptimize)
                 .addContainerGap(257, Short.MAX_VALUE))
         );
+<<<<<<< HEAD
 
         tabbedPane.addTab("Adjust Prices", jPanel2);
 
@@ -1370,4 +1375,5 @@ private class PriceChangeRecord {
         this.timestamp = new java.util.Date();
     }
 }
+
 }
