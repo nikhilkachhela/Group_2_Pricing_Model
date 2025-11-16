@@ -273,4 +273,8 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                 .addComponent(btnAutoOptimize)
                 .addContainerGap(257, Short.MAX_VALUE))
         );
+
+        tabbedPane.addTab("Adjust Prices", jPanel2);
+
+        jLabel4.setText("Click below to calculate new revenue with adjusted prices");
 }
