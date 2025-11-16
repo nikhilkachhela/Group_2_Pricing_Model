@@ -171,5 +171,42 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
                 .addComponent(btnRefresh)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        tabbedPane.addTab("Browse Products", jPanel1);
+
+        jLabel2.setText("Select Product to Adjust:");
+
+        productComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        productComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productComboBoxActionPerformed(evt);
+            }
+        });
+
+        lblCurrentTarget.setText("Current Target Price:");
+
+        txtCurrentTarget.setEditable(false);
+
+        jLabel3.setText("New Target Price:");
+
+        btnIncrease10.setText("Increase by 10%");
+        btnIncrease10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncrease10ActionPerformed(evt);
+            }
+        });
+
+        btnDecrease10.setText("Decrease by 10%");
+        btnDecrease10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecrease10ActionPerformed(evt);
+            }
+        });
+
+
+
+
+        btnApplyChanges.setText("Apply Changes");
+
        
 }
