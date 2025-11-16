@@ -1171,50 +1171,50 @@ private void refreshProductsTable() {
         });
     }
 
-private void updateDashboard() {
-    System.out.println("📊 Updating dashboard...");
-    
-    // Calculate metrics
-    int totalRevenue = business.getMasterOrderList().getSalesVolume();
-    
-    int productsAbove = 0;
-    int productsBelow = 0;
-    int productCount = 0;
-    
-    String bestProductName = "";
-    int bestProductRevenue = 0;
-    
-    // Loop through all products
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            productCount++;
-            
-            int above = product.getNumberOfProductSalesAboveTarget();
-            int below = product.getNumberOfProductSalesBelowTarget();
-            
-            if (above > below) productsAbove++;
-            else if (below > above) productsBelow++;
-            
-            // Track best product
-            int revenue = product.getSalesVolume();
-            if (revenue > bestProductRevenue) {
-                bestProductRevenue = revenue;
-                bestProductName = product.toString();
+    private void updateDashboard() {
+        System.out.println("📊 Updating dashboard...");
+
+        // Calculate metrics
+        int totalRevenue = business.getMasterOrderList().getSalesVolume();
+
+        int productsAbove = 0;
+        int productsBelow = 0;
+        int productCount = 0;
+
+        String bestProductName = "";
+        int bestProductRevenue = 0;
+
+        // Loop through all products
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+                productCount++;
+
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+
+                if (above > below) productsAbove++;
+                else if (below > above) productsBelow++;
+
+                // Track best product
+                int revenue = product.getSalesVolume();
+                if (revenue > bestProductRevenue) {
+                    bestProductRevenue = revenue;
+                    bestProductName = product.toString();
+                }
             }
         }
+
+        // Update labels
+        lblTotalRevenue.setText(String.format("💰 Total Revenue: $%,d", totalRevenue));
+        lblProductCount.setText(String.format("📦 Products Analyzed: %,d", productCount));
+        lblPerformanceSplit.setText(String.format("✅ Above Target: %d | ⚠️ Below Target: %d", productsAbove, productsBelow));
+        lblBestProduct.setText(String.format("🏆 Best Performer: %s ($%,d)", 
+            bestProductName.length() > 30 ? bestProductName.substring(0, 30) + "..." : bestProductName, 
+            bestProductRevenue));
+
+        System.out.println("✅ Dashboard updated!");
     }
-    
-    // Update labels
-    lblTotalRevenue.setText(String.format("💰 Total Revenue: $%,d", totalRevenue));
-    lblProductCount.setText(String.format("📦 Products Analyzed: %,d", productCount));
-    lblPerformanceSplit.setText(String.format("✅ Above Target: %d | ⚠️ Below Target: %d", productsAbove, productsBelow));
-    lblBestProduct.setText(String.format("🏆 Best Performer: %s ($%,d)", 
-        bestProductName.length() > 30 ? bestProductName.substring(0, 30) + "..." : bestProductName, 
-        bestProductRevenue));
-    
-    System.out.println("✅ Dashboard updated!");
-}
 
 private void loadProductComboBox() {
     productComboBox.removeAllItems();
