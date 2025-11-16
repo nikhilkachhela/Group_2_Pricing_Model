@@ -1019,25 +1019,25 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
     private void supplierFilterComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierFilterComboBoxActionPerformed
         // TODO add your handling code here:
         // Get selected supplier
-    String selectedSupplier = (String) supplierFilterComboBox.getSelectedItem();
-    
-    if (selectedSupplier == null) {
-        return; // No selection
-    }
-    
-    System.out.println("🔽 Supplier filter changed to: " + selectedSupplier);
-    
-    // Check if "All Suppliers" is selected
-    if ("All Suppliers".equals(selectedSupplier)) {
-        // Show all products
-        refreshProductsTable();
-    } else {
-        // Show only products from selected supplier
-        refreshProductsTableForSupplier(selectedSupplier);
-    }
-    
-    // Update status
-    updateFilterStatus(selectedSupplier);
+        String selectedSupplier = (String) supplierFilterComboBox.getSelectedItem();
+
+        if (selectedSupplier == null) {
+            return; // No selection
+        }
+
+        System.out.println("🔽 Supplier filter changed to: " + selectedSupplier);
+
+        // Check if "All Suppliers" is selected
+        if ("All Suppliers".equals(selectedSupplier)) {
+            // Show all products
+            refreshProductsTable();
+        } else {
+            // Show only products from selected supplier
+            refreshProductsTableForSupplier(selectedSupplier);
+        }
+
+        // Update status
+        updateFilterStatus(selectedSupplier);
     }//GEN-LAST:event_supplierFilterComboBoxActionPerformed
 
     /**
