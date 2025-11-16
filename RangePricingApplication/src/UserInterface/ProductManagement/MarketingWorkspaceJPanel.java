@@ -439,8 +439,8 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
         // TODO add your handling code here:
         System.out.println("🔄 Refreshing products table...");
-    refreshProductsTable();
-    javax.swing.JOptionPane.showMessageDialog(this, "Products table refreshed!");
+        refreshProductsTable();
+        javax.swing.JOptionPane.showMessageDialog(this, "Products table refreshed!");
     }//GEN-LAST:event_btnRefreshActionPerformed
 
     private void btnApplyChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyChangesActionPerformed
