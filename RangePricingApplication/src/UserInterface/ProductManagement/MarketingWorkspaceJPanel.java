@@ -876,22 +876,22 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         System.out.println("   📉 Prices decreased: " + pricesDecreased);
     }
 
-// Helper method to truncate long names
-private String truncate(String text, int maxLength) {
-    if (text.length() <= maxLength) {
-        return text;
+    // Helper method to truncate long names
+    private String truncate(String text, int maxLength) {
+        if (text.length() <= maxLength) {
+            return text;
+        }
+        return text.substring(0, maxLength - 3) + "...";
     }
-    return text.substring(0, maxLength - 3) + "...";
-}
 
-// Helper class for sorting
-private class ProductPerformanceData {
-    String productName;
-    int targetPrice;
-    int salesAbove;
-    int salesBelow;
-    int revenue;
-    int pricePerformance;
+    // Helper class for sorting
+    private class ProductPerformanceData {
+        String productName;
+        int targetPrice;
+        int salesAbove;
+        int salesBelow;
+        int revenue;
+        int pricePerformance;
     }//GEN-LAST:event_btnGenerateReportActionPerformed
 
     private void btnUpdateDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDashboardActionPerformed
@@ -903,17 +903,17 @@ private class ProductPerformanceData {
         // TODO add your handling code here:
         String searchText = txtSearchProduct.getText().toLowerCase();
     
-    javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) productsTable.getModel();
-    javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter = 
-        new javax.swing.table.TableRowSorter<>(model);
-    
-    productsTable.setRowSorter(sorter);
-    
-    if (searchText.trim().length() == 0) {
-        sorter.setRowFilter(null);
-    } else {
-        sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchText));
-    }
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) productsTable.getModel();
+        javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> sorter = 
+            new javax.swing.table.TableRowSorter<>(model);
+
+        productsTable.setRowSorter(sorter);
+
+        if (searchText.trim().length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + searchText));
+        }
     }//GEN-LAST:event_txtSearchProductActionPerformed
 
     private void btnAutoOptimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoOptimizeActionPerformed
