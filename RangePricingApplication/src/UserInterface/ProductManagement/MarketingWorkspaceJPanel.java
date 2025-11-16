@@ -1134,87 +1134,87 @@ private void refreshProductsTable() {
 }
 
 // NEW METHOD: Color code rows based on performance
-private void colorCodeTableRows() {
-    productsTable.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
-        @Override
-        public java.awt.Component getTableCellRendererComponent(
-                javax.swing.JTable table, Object value, boolean isSelected, 
-                boolean hasFocus, int row, int column) {
-            
-            java.awt.Component cell = super.getTableCellRendererComponent(
-                    table, value, isSelected, hasFocus, row, column);
-            
-            if (!isSelected) {
-                
-                if (column == 0) {
-        cell.setBackground(new java.awt.Color(245, 245, 245)); // Very light gray
-        cell.setFont(cell.getFont().deriveFont(java.awt.Font.BOLD)); // Make supplier names bold
-        return cell;
-    }
-                // 🆕 UPDATED: Column indices shifted by 1 because we added Supplier column
-                int above = (Integer) table.getValueAt(row, 3); // Column 3 = Above Target (was 2)
-                int below = (Integer) table.getValueAt(row, 4); // Column 4 = Below Target (was 3)
-                
-                if (above > below && above > 0) {
-                    cell.setBackground(new java.awt.Color(200, 255, 200)); // Light green
-                } else if (below > above && below > 0) {
-                    cell.setBackground(new java.awt.Color(255, 200, 200)); // Light red
-                } else if (above == 0 && below == 0) {
-                    cell.setBackground(new java.awt.Color(240, 240, 240)); // Light gray
-                } else {
-                    cell.setBackground(java.awt.Color.WHITE);
-                }
-            }
-            
+    private void colorCodeTableRows() {
+        productsTable.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                    javax.swing.JTable table, Object value, boolean isSelected, 
+                    boolean hasFocus, int row, int column) {
+
+                java.awt.Component cell = super.getTableCellRendererComponent(
+                        table, value, isSelected, hasFocus, row, column);
+
+                if (!isSelected) {
+
+                    if (column == 0) {
+            cell.setBackground(new java.awt.Color(245, 245, 245)); // Very light gray
+            cell.setFont(cell.getFont().deriveFont(java.awt.Font.BOLD)); // Make supplier names bold
             return cell;
         }
-    });
-}
+                    // 🆕 UPDATED: Column indices shifted by 1 because we added Supplier column
+                    int above = (Integer) table.getValueAt(row, 3); // Column 3 = Above Target (was 2)
+                    int below = (Integer) table.getValueAt(row, 4); // Column 4 = Below Target (was 3)
 
-private void updateDashboard() {
-    System.out.println("📊 Updating dashboard...");
-    
-    // Calculate metrics
-    int totalRevenue = business.getMasterOrderList().getSalesVolume();
-    
-    int productsAbove = 0;
-    int productsBelow = 0;
-    int productCount = 0;
-    
-    String bestProductName = "";
-    int bestProductRevenue = 0;
-    
-    // Loop through all products
-    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
-    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
-        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
-            productCount++;
-            
-            int above = product.getNumberOfProductSalesAboveTarget();
-            int below = product.getNumberOfProductSalesBelowTarget();
-            
-            if (above > below) productsAbove++;
-            else if (below > above) productsBelow++;
-            
-            // Track best product
-            int revenue = product.getSalesVolume();
-            if (revenue > bestProductRevenue) {
-                bestProductRevenue = revenue;
-                bestProductName = product.toString();
+                    if (above > below && above > 0) {
+                        cell.setBackground(new java.awt.Color(200, 255, 200)); // Light green
+                    } else if (below > above && below > 0) {
+                        cell.setBackground(new java.awt.Color(255, 200, 200)); // Light red
+                    } else if (above == 0 && below == 0) {
+                        cell.setBackground(new java.awt.Color(240, 240, 240)); // Light gray
+                    } else {
+                        cell.setBackground(java.awt.Color.WHITE);
+                    }
+                }
+
+                return cell;
+            }
+        });
+    }
+
+    private void updateDashboard() {
+        System.out.println("📊 Updating dashboard...");
+
+        // Calculate metrics
+        int totalRevenue = business.getMasterOrderList().getSalesVolume();
+
+        int productsAbove = 0;
+        int productsBelow = 0;
+        int productCount = 0;
+
+        String bestProductName = "";
+        int bestProductRevenue = 0;
+
+        // Loop through all products
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+                productCount++;
+
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+
+                if (above > below) productsAbove++;
+                else if (below > above) productsBelow++;
+
+                // Track best product
+                int revenue = product.getSalesVolume();
+                if (revenue > bestProductRevenue) {
+                    bestProductRevenue = revenue;
+                    bestProductName = product.toString();
+                }
             }
         }
+
+        // Update labels
+        lblTotalRevenue.setText(String.format("💰 Total Revenue: $%,d", totalRevenue));
+        lblProductCount.setText(String.format("📦 Products Analyzed: %,d", productCount));
+        lblPerformanceSplit.setText(String.format("✅ Above Target: %d | ⚠️ Below Target: %d", productsAbove, productsBelow));
+        lblBestProduct.setText(String.format("🏆 Best Performer: %s ($%,d)", 
+            bestProductName.length() > 30 ? bestProductName.substring(0, 30) + "..." : bestProductName, 
+            bestProductRevenue));
+
+        System.out.println("✅ Dashboard updated!");
     }
-    
-    // Update labels
-    lblTotalRevenue.setText(String.format("💰 Total Revenue: $%,d", totalRevenue));
-    lblProductCount.setText(String.format("📦 Products Analyzed: %,d", productCount));
-    lblPerformanceSplit.setText(String.format("✅ Above Target: %d | ⚠️ Below Target: %d", productsAbove, productsBelow));
-    lblBestProduct.setText(String.format("🏆 Best Performer: %s ($%,d)", 
-        bestProductName.length() > 30 ? bestProductName.substring(0, 30) + "..." : bestProductName, 
-        bestProductRevenue));
-    
-    System.out.println("✅ Dashboard updated!");
-}
 
 private void loadProductComboBox() {
     productComboBox.removeAllItems();
