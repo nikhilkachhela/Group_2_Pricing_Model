@@ -277,4 +277,11 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         tabbedPane.addTab("Adjust Prices", jPanel2);
 
         jLabel4.setText("Click below to calculate new revenue with adjusted prices");
+
+        btnRunSimulation.setText("RUN SIMULATION");
+        btnRunSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRunSimulationActionPerformed(evt);
+            }
+        });
 }
