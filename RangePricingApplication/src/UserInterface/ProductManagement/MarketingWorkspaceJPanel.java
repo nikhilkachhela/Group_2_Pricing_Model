@@ -108,4 +108,28 @@ public MarketingWorkspaceJPanel(Business bz, JPanel jp) {
         });
         jScrollPane1.setViewportView(productsTable);
 
-        
+        btnRefresh.setText("Refresh Data");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+
+
+        jLabel5.setText("Search Product:");
+
+        txtSearchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchProductActionPerformed(evt);
+            }
+        });
+
+        lblSupplierFilter.setText("Filter by Supplier:");
+
+        supplierFilterComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        supplierFilterComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierFilterComboBoxActionPerformed(evt);
+            }
+        });
