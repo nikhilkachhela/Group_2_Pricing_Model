@@ -1349,3 +1349,15 @@ private int calculateTotalTargetRevenue() {
     
     return total;
 }
+
+
+
+/**
+ * Helper class to track price changes
+ */
+private class PriceChangeRecord {
+    String productName;
+    int beforePrice;
+    int afterPrice;
+    String changeType; // "INCREASE" or "DECREASE"
+    java.util.Date timestamp;
