@@ -1361,3 +1361,14 @@ private class PriceChangeRecord {
     int afterPrice;
     String changeType; // "INCREASE" or "DECREASE"
     java.util.Date timestamp;
+
+    public PriceChangeRecord(String name, int before, int after, String type) {
+        this.productName = name;
+        this.beforePrice = before;
+        this.afterPrice = after;
+        this.changeType = type;
+        this.timestamp = new java.util.Date();
+    }
+}
+
+}
