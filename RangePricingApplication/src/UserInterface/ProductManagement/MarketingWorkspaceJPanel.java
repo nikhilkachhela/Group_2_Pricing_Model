@@ -1236,3 +1236,9 @@ private void loadProductComboBox() {
 
 private void loadSupplierFilterComboBox() {
     System.out.println("🔄 Loading supplier filter...");
+
+    // Clear existing items
+    supplierFilterComboBox.removeAllItems();
+    
+    // Add "All Suppliers" as default option
+    supplierFilterComboBox.addItem("All Suppliers");
