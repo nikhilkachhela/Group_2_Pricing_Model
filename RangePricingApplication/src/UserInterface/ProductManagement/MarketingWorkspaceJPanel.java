@@ -1242,3 +1242,15 @@ private void loadSupplierFilterComboBox() {
     
     // Add "All Suppliers" as default option
     supplierFilterComboBox.addItem("All Suppliers");
+
+    // Get all suppliers from business
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = 
+        business.getSupplierDirectory().getSuplierList();
+    
+    // Add each supplier name
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        supplierFilterComboBox.addItem(supplier.getName());
+    }
+    
+    System.out.println("✅ Loaded " + suppliers.size() + " suppliers into filter");
+}
