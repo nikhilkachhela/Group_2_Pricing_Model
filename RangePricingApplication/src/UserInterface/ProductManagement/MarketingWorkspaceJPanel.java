@@ -1325,3 +1325,27 @@ private TheBusiness.ProductManagement.Product findProductByName(String name) {
     
     return null;
 }
+
+// Calculate what total revenue SHOULD be with current target prices
+private int calculateTotalTargetRevenue() {
+    int total = 0;
+    
+    TheBusiness.OrderManagement.MasterOrderList orderList = business.getMasterOrderList();
+    // We need to iterate through all orders and sum up target prices
+    // This is an estimate based on actual quantities sold
+
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+    
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+            // Get how many times this product was sold (above + below target)
+            int timesSold = product.getNumberOfProductSalesAboveTarget() + 
+                           product.getNumberOfProductSalesBelowTarget();
+            
+            // Multiply by target price (this is what we WANTED to make)
+            total += product.getTargetPrice() * timesSold;
+        }
+    }
+    
+    return total;
+}
