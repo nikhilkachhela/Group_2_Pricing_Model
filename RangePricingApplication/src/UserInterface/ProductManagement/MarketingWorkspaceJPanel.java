@@ -1325,3 +1325,11 @@ private TheBusiness.ProductManagement.Product findProductByName(String name) {
     
     return null;
 }
+
+// Calculate what total revenue SHOULD be with current target prices
+private int calculateTotalTargetRevenue() {
+    int total = 0;
+    
+    TheBusiness.OrderManagement.MasterOrderList orderList = business.getMasterOrderList();
+    // We need to iterate through all orders and sum up target prices
+    // This is an estimate based on actual quantities sold
