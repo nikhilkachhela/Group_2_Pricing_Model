@@ -1183,3 +1183,24 @@ private void refreshProductsTable() {
 
         String bestProductName = "";
         int bestProductRevenue = 0;
+
+        // Loop through all products
+        java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+        for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+            for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+                productCount++;
+
+                int above = product.getNumberOfProductSalesAboveTarget();
+                int below = product.getNumberOfProductSalesBelowTarget();
+
+                if (above > below) productsAbove++;
+                else if (below > above) productsBelow++;
+
+                // Track best product
+                int revenue = product.getSalesVolume();
+                if (revenue > bestProductRevenue) {
+                    bestProductRevenue = revenue;
+                    bestProductName = product.toString();
+                }
+            }
+        }
