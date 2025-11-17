@@ -1236,3 +1236,40 @@ private void loadProductComboBox() {
 
 private void loadSupplierFilterComboBox() {
     System.out.println("🔄 Loading supplier filter...");
+
+    // Clear existing items
+    supplierFilterComboBox.removeAllItems();
+    
+    // Add "All Suppliers" as default option
+    supplierFilterComboBox.addItem("All Suppliers");
+
+    // Get all suppliers from business
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = 
+        business.getSupplierDirectory().getSuplierList();
+    
+    // Add each supplier name
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        supplierFilterComboBox.addItem(supplier.getName());
+    }
+    
+    System.out.println("✅ Loaded " + suppliers.size() + " suppliers into filter");
+}
+
+/**
+ * Refreshes the products table showing only products from selected supplier
+ * @param supplierName The name of the supplier to filter by
+ */
+private void refreshProductsTableForSupplier(String supplierName) {
+    System.out.println("🔍 Filtering products for supplier: " + supplierName);
+    
+    // Clear existing rows
+    javax.swing.table.DefaultTableModel model = 
+        (javax.swing.table.DefaultTableModel) productsTable.getModel();
+    model.setRowCount(0);
+    
+    // Get all suppliers
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = 
+        business.getSupplierDirectory().getSuplierList();
+    
+    int productCount = 0;
+    
