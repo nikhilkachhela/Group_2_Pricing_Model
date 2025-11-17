@@ -1304,3 +1304,24 @@ private void refreshProductsTableForSupplier(String supplierName) {
         
         break; // We found the supplier, no need to continue
     }
+
+    // Apply color coding
+    colorCodeTableRows();
+    
+    System.out.println("✅ Loaded " + productCount + " products from " + supplierName);
+}
+
+// Helper method to find product by name
+private TheBusiness.ProductManagement.Product findProductByName(String name) {
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+    
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        for (TheBusiness.ProductManagement.Product product : supplier.getProductCatalog().getProductList()) {
+            if (product.toString().equals(name)) {
+                return product;
+            }
+        }
+    }
+    
+    return null;
+}
