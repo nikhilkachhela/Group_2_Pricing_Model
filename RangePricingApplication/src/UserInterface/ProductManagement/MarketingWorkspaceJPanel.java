@@ -1273,3 +1273,34 @@ private void refreshProductsTableForSupplier(String supplierName) {
     
     int productCount = 0;
     
+    // Loop through suppliers
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        
+        // Check if this is the supplier we want to filter by
+        if (!supplier.getName().equals(supplierName)) {
+            continue; // Skip this supplier
+        }
+        
+        // Get this supplier's products
+        TheBusiness.ProductManagement.ProductCatalog catalog = supplier.getProductCatalog();
+        
+        for (TheBusiness.ProductManagement.Product product : catalog.getProductList()) {
+            // Calculate performance metrics
+            int numAboveTarget = product.getNumberOfProductSalesAboveTarget();
+            int numBelowTarget = product.getNumberOfProductSalesBelowTarget();
+            
+            // Add row to table
+            Object[] row = {
+                supplier.getName(),
+                product.toString(),
+                product.getTargetPrice(),
+                numAboveTarget,
+                numBelowTarget
+            };
+            
+            model.addRow(row);
+            productCount++;
+        }
+        
+        break; // We found the supplier, no need to continue
+    }
