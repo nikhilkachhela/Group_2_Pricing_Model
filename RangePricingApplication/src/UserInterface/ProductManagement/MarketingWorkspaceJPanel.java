@@ -1218,3 +1218,21 @@ private void refreshProductsTable() {
 
 private void loadProductComboBox() {
     productComboBox.removeAllItems();
+
+    // Get all products
+    java.util.ArrayList<TheBusiness.Supplier.Supplier> suppliers = business.getSupplierDirectory().getSuplierList();
+    
+    for (TheBusiness.Supplier.Supplier supplier : suppliers) {
+        TheBusiness.ProductManagement.ProductCatalog catalog = supplier.getProductCatalog();
+        
+        for (TheBusiness.ProductManagement.Product product : catalog.getProductList()) {
+            productComboBox.addItem(product.toString());
+        }
+    }
+    
+    System.out.println("✅ Loaded products into combo box");
+}
+
+
+private void loadSupplierFilterComboBox() {
+    System.out.println("🔄 Loading supplier filter...");
