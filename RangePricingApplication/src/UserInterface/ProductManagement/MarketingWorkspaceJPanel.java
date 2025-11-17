@@ -1204,3 +1204,17 @@ private void refreshProductsTable() {
                 }
             }
         }
+
+        // Update labels
+        lblTotalRevenue.setText(String.format("💰 Total Revenue: $%,d", totalRevenue));
+        lblProductCount.setText(String.format("📦 Products Analyzed: %,d", productCount));
+        lblPerformanceSplit.setText(String.format("✅ Above Target: %d | ⚠️ Below Target: %d", productsAbove, productsBelow));
+        lblBestProduct.setText(String.format("🏆 Best Performer: %s ($%,d)", 
+            bestProductName.length() > 30 ? bestProductName.substring(0, 30) + "..." : bestProductName, 
+            bestProductRevenue));
+
+        System.out.println("✅ Dashboard updated!");
+    }
+
+private void loadProductComboBox() {
+    productComboBox.removeAllItems();
